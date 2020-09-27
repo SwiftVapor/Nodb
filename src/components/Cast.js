@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-export class Cast extends Component{
+import Catch from "./Catch";
+import axios from 'axios';
+export default class Cast extends Component{
     constructor(props) {
-        super(prop)
+        super(props)
         this.state={
             hookedFish: []
         }
@@ -12,7 +14,24 @@ export class Cast extends Component{
     getHookedFish =()=> {
         axios.get('/api/catch')
         .then(res => {
-            this.setState(hookedFish: res.data)
+            this.setState({hookedFish: res.data})
         })
+        .catch(err => console.log(err))
+    }
+    render(){
+        const mappedFish = this.state.hookedFish.map((fish, i) => (
+            <Catch
+                key={i}
+                fish={fish}
+                catchFn={this.props.catchFn}
+                refreshFn={this.getHookedFish}
+                />
+        ))
+        return(
+            <div className='fish'>
+                {mappedFish}  
+            </div>
+        )
+
     }
 }
