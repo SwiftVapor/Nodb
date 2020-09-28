@@ -33,7 +33,7 @@ catchFish(fish){
 deleteFish = (id,quantity) => {
   axios.delete('/api/caught-fish/${id}')
   .then(res =>{
-    this.setSTate({caughtFish: res.data})
+    this.setState({caughtFish: res.data})
   })
   .catch(err => console.log(err));
 }
@@ -48,7 +48,7 @@ deleteFish = (id,quantity) => {
       />
       <Bag
         caughtFish= {this.state.caughtFish}
-        // quantityFn= {this.editCount}
+        // countFn= {this.editCount}
         deleteFn={this.deleteFish}      />
     </div>
     );

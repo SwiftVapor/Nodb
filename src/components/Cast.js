@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Catch from "./Catch";
 import axios from 'axios';
+
 export default class Cast extends Component{
     constructor(props) {
         super(props)
@@ -28,7 +29,7 @@ export default class Cast extends Component{
                 />
         ))
         return(
-            <div className='fish'>
+            <div className='fish-flex'>
                 {mappedFish}  
             </div>
         )

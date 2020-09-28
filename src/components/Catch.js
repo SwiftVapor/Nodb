@@ -5,7 +5,8 @@ export default class Catch extends Component{
         const {fish} = this.props;
         let newFish = {
             name: fish.name,
-            image: fish.img
+            image: fish.img,
+            quantity: 1
         }
         this.props.catchFn(newFish);
         this.props.refreshFn();
@@ -13,8 +14,8 @@ export default class Catch extends Component{
     render(){
         return(
             <div onClick= {this.handleCatch}>
-                <img src={this.props.fish.img} alt= {this.props.fish.name}/>
-                <p>{this.props.fish.name}</p>
+                <img className= 'fish' src={this.props.fish.img} alt= {this.props.fish.name}/>
+                <p className= 'tooltip'>{this.props.fish.name}</p>
             </div>
         )
     }
