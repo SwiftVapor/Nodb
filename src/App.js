@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header'
-import Cast from './components/Cast'
+import Header from './components/Header';
+import Cast from './components/Cast';
 import axios from 'axios';
-import Bag from './components/Bag'
+import Bag from './components/Bag';
 
 class App extends Component {
 constructor(props){
@@ -11,9 +11,10 @@ constructor(props){
   this.state={
     caughtFish:[]
   }
+  this.catchFish = this.catchFish.bind(this)
 }
 componentDidMount(){
-  axios.get('/api/caught-fish')
+  axios.get(`/api/bag`)
   .then(res=>{
     this.setState({caughtFish: res.data})
   })
@@ -21,17 +22,26 @@ componentDidMount(){
 }
 
 catchFish(fish){
-  axios.post('/api/caught-fish', {fish: fish})
-  .then(res => {
-    this.setState({caughtFish: res.data})
+  
+  const fishIndex =this.state.caughtFish.findIndex((caughtFish)=>{
+    return caughtFish.name === fish.name
   })
-  .catch(err => console.log(err));
+  if (fishIndex > -1){
+    axios.put(`/api/bag/${fish.name}`)
+    .then(res => {
+      this.setState({caughtFish: res.data})
+    })
+    .catch(err => console.log(err));
+  }else{
+    axios.post(`/api/bag`, {fish: fish})
+    .then(res => {
+      this.setState({caughtFish: res.data})
+    })
+    .catch(err => console.log(err));
 }
-// editCount = (id, quantity){
-
-// }
+}
 deleteFish = (id,quantity) => {
-  axios.delete('/api/caught-fish/${id}')
+  axios.delete(`/api/bag/${id}`)
   .then(res =>{
     this.setState({caughtFish: res.data})
   })
@@ -49,7 +59,8 @@ deleteFish = (id,quantity) => {
       <Bag
         caughtFish= {this.state.caughtFish}
         // countFn= {this.editCount}
-        deleteFn={this.deleteFish}      />
+        deleteFn={this.deleteFish}      
+      />
     </div>
     );
   }

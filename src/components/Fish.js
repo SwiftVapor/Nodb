@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Fish extends Component{
     constructor(props){
@@ -12,10 +12,16 @@ export default class Fish extends Component{
         this.setState({isEditing: !this.state.isEditing})
     }
     render(){
+        console.log(this.props.fish.image)
         return(
             <div>
-                <img className= 'fish' src={this.props.fish.img} alt= {this.props.fish.name}/>
-                <p className='tooltip'>{this.props.fish.name}</p>
+                <div className= "thumbnail">
+                <div className= 'quantity'>
+                    {this.props.fish.quantity}
+                </div>
+                <img className= 'fish'  src={this.props.fish.image} alt={this.props.fish.name}></img>
+                </div>
+                <p className='tooltip'> {this.props.fish.name}</p>
                 <button onClick={() => this.props.deleteFn(this.props.fish.id)}>Delete</button>
             </div>
         )

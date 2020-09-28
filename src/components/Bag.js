@@ -7,7 +7,6 @@ export default function Bag (props){
         <Fish
             key = {i}
             fish = {fish}
-            // countFn = {props.editCount}
             deleteFn = {props.deleteFn}
         />
     ))

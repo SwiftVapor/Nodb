@@ -30,7 +30,6 @@ module.exports = {
         hooked.shift();
         hooked.push(fish1, fish2, fish3);
         res.status(200).send(hooked)
-        .catch(err => res.status(500).send(err));
     }
 
 }
